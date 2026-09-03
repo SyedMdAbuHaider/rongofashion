@@ -72,28 +72,42 @@ button{font:inherit}
 .section{padding:92px clamp(20px,7vw,100px)}
 .section-head{text-align:center;margin-bottom:38px}.kicker{font-size:9px;letter-spacing:4px;color:#be7185;font-weight:800}.section h2{font:400 39px/1.1 Georgia,serif;margin:10px 0}.section-head p{font-size:12px;color:var(--muted);margin:0}
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.product{position:relative;min-width:0}.visual{height:365px;border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(145deg,#f5e5e0,#f9dce4)}
-.product:nth-child(2) .visual{background:linear-gradient(145deg,#e9e1e8,#c9b5c5)}
-.product:nth-child(3) .visual{background:linear-gradient(145deg,#f4eadf,#e8c6bd)}
-.product:nth-child(4) .visual{background:linear-gradient(145deg,#f5e0e1,#eab0bf)}
-.person{height:91%;width:70%;border-radius:48% 48% 10px 10px 90px 90px;background:linear-gradient(145deg,#f6c5ca,#d97591);position:relative;box-shadow:10px 18px 35px rgba(74,38,48,.12);transition:.45s}
-.product:nth-child(2) .person{background:linear-gradient(145deg,#d9c0d2,#957891)}
-.product:nth-child(3) .person{background:linear-gradient(145deg,#f7ded4,#d59a96)}
-.product:nth-child(4) .person{background:linear-gradient(145deg,#f3c0c9,#d86f89)}
-.person:before{content:"";position:absolute;top:3%;left:25%;width:50%;height:24%;border-radius:50%;background:#3b282d}
-.person:after{content:"";position:absolute;top:17%;left:32%;width:36%;height:24%;border-radius:48%;background:#f1bfa9}
-.product:hover .person{transform:scale(1.04) translateY(-5px)}
-.wish{position:absolute;right:13px;top:13px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;font-size:18px;z-index:4;transition:.2s}
+.product{position:relative;min-width:0}.visual{height:365px;border-radius:16px;overflow:hidden;position:relative;background:#f8eef0}
+.product-image{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform .55s ease}
+.product:hover .product-image{transform:scale(1.035)}
+.visual.sold-out:after{content:"";position:absolute;inset:0;background:rgba(24,21,26,.17);pointer-events:none}
+.stock-out{position:absolute;left:13px;top:13px;z-index:5;background:#18151a;color:#fff;padding:8px 11px;border-radius:8px;font-size:8px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;box-shadow:0 6px 18px rgba(24,21,26,.18)}
+.wish{position:absolute;right:13px;top:13px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.94);cursor:pointer;font-size:18px;z-index:7;transition:.2s}
 .wish:hover{color:var(--rose);transform:scale(1.08)}
-.tag{position:absolute;left:13px;top:13px;background:#18151a;color:#fff;padding:6px 9px;border-radius:8px;font-size:8px;letter-spacing:1px;z-index:4}
-.product-info{padding:15px 3px}.product-info h3{font-size:12px;font-weight:600;margin:0 0 7px}.price{font-size:12px;font-weight:800}.old{font-size:10px;color:#aaa;text-decoration:line-through;margin-left:5px}
+.product-info{padding:15px 3px}.product-info h3{font-size:12px;font-weight:600;margin:0 0 7px}.price{font-size:12px;font-weight:800}.stock-status{display:inline-block;margin-left:7px;font-size:9px;font-weight:700;color:#a34b60;letter-spacing:.4px}.product.sold-out .product-info{opacity:.78}
 .viewall{display:flex;justify-content:center;margin-top:35px}
 
 .editorial{padding:0 clamp(18px,6vw,92px) 92px}.editorial-box{min-height:420px;background:#fff3f5;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:52% 48%;position:relative}
-.editorial-images{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;min-height:420px}
-.look{position:relative;overflow:hidden;background:#ead4cf;display:flex;align-items:flex-end;justify-content:center}
-.look:nth-child(2){background:#f0d9d5}.look:nth-child(3){background:#eadfd2}
-.look .person{width:80%;height:87%;border-radius:50% 50% 0 0}
+.editorial-images{position:relative;min-height:420px;overflow:hidden;background:#f8e8eb}
+.look{position:absolute;inset:0;overflow:hidden;opacity:0;animation:lookbookFade 16s infinite ease-in-out}
+.look:nth-child(1){animation-delay:0s}
+.look:nth-child(2){animation-delay:4s}
+.look:nth-child(3){animation-delay:8s}
+.look:nth-child(4){animation-delay:12s}
+.look img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transform:scale(1.01);animation:lookbookZoom 16s infinite ease-in-out}
+.look:nth-child(1) img{animation-delay:0s}
+.look:nth-child(2) img{animation-delay:4s}
+.look:nth-child(3) img{animation-delay:8s}
+.look:nth-child(4) img{animation-delay:12s}
+@keyframes lookbookFade{
+  0%,24%{opacity:1}
+  25%,100%{opacity:0}
+}
+@keyframes lookbookZoom{
+  0%,24%{transform:scale(1.01)}
+  25%,100%{transform:scale(1.07)}
+}
+.editorial-images:after{content:"LOOKBOOK";position:absolute;left:18px;bottom:18px;z-index:8;padding:7px 10px;border-radius:8px;background:rgba(24,21,26,.72);color:#fff;font-size:8px;font-weight:800;letter-spacing:1.8px}
+@media (prefers-reduced-motion:reduce){
+  .look,.look img{animation:none}
+  .look:first-child{opacity:1}
+  .look:not(:first-child){opacity:0}
+}
 .editorial-copy{align-self:center;padding:55px clamp(30px,6vw,80px)}.editorial-copy h2{font:400 43px/1.05 Georgia,serif;margin:13px 0 15px}.editorial-copy p{max-width:420px;color:var(--muted);font-size:12px;line-height:1.8;margin-bottom:25px}
 
 .about{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;background:#fbf8f6;padding-top:85px;padding-bottom:85px}
@@ -182,18 +196,62 @@ footer{background:#fdf7f8;border-top:1px solid var(--line);padding:58px clamp(22
 <section id="shop" class="section">
   <div class="section-head"><div class="kicker">CURATED FOR YOU</div><h2>Featured Collection</h2><p>Soft tones, graceful cuts, and pieces made to be worn again and again.</p></div>
   <div class="products">
-    <article class="product"><div class="visual"><span class="tag">BESTSELLER</span><button class="wish">♡</button><div class="person"></div></div><div class="product-info"><h3>Floral Pink Dress</h3><span class="price">৳1,650</span></div></article>
-    <article class="product"><div class="visual"><span class="tag">NEW</span><button class="wish">♡</button><div class="person"></div></div><div class="product-info"><h3>Lavender Everyday Top</h3><span class="price">৳1,250</span></div></article>
-    <article class="product"><div class="visual"><button class="wish">♡</button><div class="person"></div></div><div class="product-info"><h3>Summer Breeze Dress</h3><span class="price">৳1,850</span></div></article>
-    <article class="product"><div class="visual"><span class="tag">NEW</span><button class="wish">♡</button><div class="person"></div></div><div class="product-info"><h3>Embroidered Pink Set</h3><span class="price">৳2,250</span></div></article>
+
+    <article class="product sold-out">
+      <div class="visual sold-out">
+        <span class="stock-out">STOCK OUT</span>
+        <button class="wish" aria-label="Add to wishlist">♡</button>
+        <img class="product-image" src="https://i.pinimg.com/736x/39/a9/e5/39a9e59a3ed501e4e732469926e86c8c.jpg" alt="Elegant Rose Three Piece" loading="lazy">
+      </div>
+      <div class="product-info"><h3>Elegant Rose Three Piece</h3><span class="price">৳2,250</span><span class="stock-status">Stock Out</span></div>
+    </article>
+
+    <article class="product sold-out">
+      <div class="visual sold-out">
+        <span class="stock-out">STOCK OUT</span>
+        <button class="wish" aria-label="Add to wishlist">♡</button>
+        <img class="product-image" src="https://i.pinimg.com/736x/82/b9/ec/82b9ec3327c71b583402391d04eed23d.jpg" alt="Classic Floral Three Piece" loading="lazy">
+      </div>
+      <div class="product-info"><h3>Classic Floral Three Piece</h3><span class="price">৳2,450</span><span class="stock-status">Stock Out</span></div>
+    </article>
+
+    <article class="product sold-out">
+      <div class="visual sold-out">
+        <span class="stock-out">STOCK OUT</span>
+        <button class="wish" aria-label="Add to wishlist">♡</button>
+        <img class="product-image" src="https://i.pinimg.com/736x/2f/ba/b2/2fbab23fe0e734bb719da9440b33c15d.jpg" alt="Soft Lavender Three Piece" loading="lazy">
+      </div>
+      <div class="product-info"><h3>Soft Lavender Three Piece</h3><span class="price">৳2,350</span><span class="stock-status">Stock Out</span></div>
+    </article>
+
+    <article class="product sold-out">
+      <div class="visual sold-out">
+        <span class="stock-out">STOCK OUT</span>
+        <button class="wish" aria-label="Add to wishlist">♡</button>
+        <img class="product-image" src="https://i.pinimg.com/736x/39/a9/e5/39a9e59a3ed501e4e732469926e86c8c.jpg" alt="Signature Three Piece Set" loading="lazy">
+      </div>
+      <div class="product-info"><h3>Signature Three Piece Set</h3><span class="price">৳2,550</span><span class="stock-status">Stock Out</span></div>
+    </article>
+
   </div>
   <div class="viewall"><a class="cta" href="#shop">VIEW ALL PRODUCTS <span>→</span></a></div>
 </section>
 
 <section id="collections" class="editorial">
   <div class="editorial-box">
-    <div class="editorial-images">
-      <div class="look"><div class="person"></div></div><div class="look"><div class="person"></div></div><div class="look"><div class="person"></div></div>
+    <div class="editorial-images" aria-label="Rongo Fashion product slideshow">
+      <div class="look">
+        <img src="https://i.pinimg.com/736x/39/a9/e5/39a9e59a3ed501e4e732469926e86c8c.jpg" alt="Elegant Rose Three Piece" loading="lazy">
+      </div>
+      <div class="look">
+        <img src="https://i.pinimg.com/736x/82/b9/ec/82b9ec3327c71b583402391d04eed23d.jpg" alt="Classic Floral Three Piece" loading="lazy">
+      </div>
+      <div class="look">
+        <img src="https://i.pinimg.com/736x/2f/ba/b2/2fbab23fe0e734bb719da9440b33c15d.jpg" alt="Soft Lavender Three Piece" loading="lazy">
+      </div>
+      <div class="look">
+        <img src="https://i.pinimg.com/736x/39/a9/e5/39a9e59a3ed501e4e732469926e86c8c.jpg" alt="Signature Three Piece Set" loading="lazy">
+      </div>
     </div>
     <div class="editorial-copy">
       <div class="kicker">LOOKBOOK 2026</div>
